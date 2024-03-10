@@ -5,15 +5,16 @@
 ## Makefile
 ##
 
-SRCLIB	=	lib/my_atoi.c 	\
+SRCLIB	=	lib/my_atoi.c 		\
 			lib/my_inttostr.c	\
-			lib/my_strlen.c \
-			lib/my_strcmp.c \
+			lib/my_strlen.c 	\
+			lib/my_strcmp.c 	\
 
 SRCNAME	=	src/main.c		\
+			src/paint.c		\
 
 
-LIB = libmy.a
+LIB 	= libmy.a
 
 OBJLIB	=	$(SRCLIB:.c=.o)
 
@@ -38,7 +39,7 @@ endif
 $(LIB) : $(OBJLIB)
 	ar rc libmy.a lib/*.o
 
-all:	$(LIB) $(NAME)
+all	:	$(LIB) $(NAME)
 
 clean:
 	rm -f $(OBJLIB) $(OBJNAME) libmy.a
@@ -46,4 +47,4 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: 	fclean all
+re	: 	fclean all

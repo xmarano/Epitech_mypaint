@@ -12,6 +12,17 @@
 #ifndef PAINT_H
     #define PAINT_H
 
-typedef struct S {
+typedef struct Sprite {
+    sfTexture *brush_t;
+    sfSprite *brush_s;
+    sfTexture *eraser_t;
+    sfSprite *eraser_s;
+    sfVector2f scale;
+    int tool;
+} Sprite_t;
+
+typedef struct St {
 } S_t;
+
+void paint(sfRenderWindow *window, Sprite_t *s);
 #endif
