@@ -13,12 +13,8 @@
     #define PAINT_H
 
 typedef struct Sprite {
-    sfTexture *brush_t;
-    sfSprite *brush_s;
-    sfTexture *eraser_t;
-    sfSprite *eraser_s;
-    sfVector2f scale;
-    int tool;
+    sfVector2f mouse_pos;
+    sfRectangleShape *pixel;
 } Sprite_t;
 
 typedef struct St {
