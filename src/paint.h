@@ -15,6 +15,8 @@
 typedef struct Sprite {
     sfVector2f mouse_pos;
     sfRectangleShape *pixel;
+    sfRectangleShape *background;
+    sfColor color;
 } Sprite_t;
 
 typedef struct St {

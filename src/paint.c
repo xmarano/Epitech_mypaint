@@ -8,9 +8,11 @@
 
 void draw(sfRenderWindow *window, Sprite_t *s)
 {
-    sfRectangleShape_setPosition(s->pixel, s->mouse_pos);
-    sfRenderWindow_drawRectangleShape(window, s->pixel, NULL);
-    sfRenderWindow_display(window);
+    if (s->mouse_pos.x > 250 && s->mouse_pos.y > 150 &&
+        s->mouse_pos.x < 1180 && s->mouse_pos.y < 650) {
+        sfRectangleShape_setPosition(s->pixel, s->mouse_pos);
+        sfRenderWindow_drawRectangleShape(window, s->pixel, NULL);
+    }
 }
 
 void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
@@ -18,9 +20,13 @@ void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
     if (event.type == sfEvtClosed)
         sfRenderWindow_close(window);
     if (sfKeyboard_isKeyPressed(sfKeySpace))
-        sfRenderWindow_clear(window, sfColor_fromRGB(49, 54, 63));
+        sfRenderWindow_drawRectangleShape(window, s->background, NULL);
     if (sfMouse_isButtonPressed(sfMouseLeft))
         draw(window, s);
+    if (sfKeyboard_isKeyPressed(sfKeyR))
+        sfRectangleShape_setFillColor(s->pixel, sfRed);
+    if (sfKeyboard_isKeyPressed(sfKeyB))
+        sfRectangleShape_setFillColor(s->pixel, sfBlue);
 }
 
 void paint(sfRenderWindow *window, Sprite_t *s)
@@ -33,4 +39,5 @@ void paint(sfRenderWindow *window, Sprite_t *s)
     s->mouse_pos.y = (float)brush.y - 8;
     while (sfRenderWindow_pollEvent(window, &event))
         event_click(window, event, s);
+    sfRenderWindow_display(window);
 }
