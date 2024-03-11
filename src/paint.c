@@ -6,19 +6,15 @@
 */
 #include "paint.h"
 
-void static draw2(Sprite_t *s, int i)
+void check_draw(sfRenderWindow *window, Sprite_t *s)
 {
-    for (int j = s->pos.y - s->pixel_size; j < s->pos.y + s->pixel_size; j++) {
-        if (i >= 220 && j >= 140 && i < 1220)
-            sfImage_setPixel(s->image, i - 220, j - 140, sfRed);
-    }
-}
-
-void draw(sfRenderWindow *window, Sprite_t *s)
-{
-    for (int i = s->pos.x - s->pixel_size; i < s->pos.x + s->pixel_size; i++)
-        draw2(s, i);
-    sfTexture_updateFromImage(s->background_t, s->image, 0, 0);
+    draw(window, s);
+    if (sfFloatRect_contains(&s->gb_red, s->pos.x, s->pos.y))
+        s->color = sfRed;
+    if (sfFloatRect_contains(&s->gb_blue, s->pos.x, s->pos.y))
+        s->color = sfBlue;
+    if (sfFloatRect_contains(&s->gb_green, s->pos.x, s->pos.y))
+        s->color = sfGreen;
 }
 
 void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
@@ -28,11 +24,18 @@ void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
     if (sfKeyboard_isKeyPressed(sfKeySpace))
         sfRenderWindow_drawSprite(window, s->background_s, NULL);
     if (sfMouse_isButtonPressed(sfMouseLeft))
-        draw(window, s);
+        check_draw(window, s);
     if (sfKeyboard_isKeyPressed(sfKeyDown) && s->pixel_size > 1)
         s->pixel_size --;
     if (sfKeyboard_isKeyPressed(sfKeyUp) && s->pixel_size < 100)
         s->pixel_size++;
+}
+
+void check_hover(Sprite_t *s)
+{
+    hover(s, s->red_pen, &s->gb_red);
+    hover(s, s->blue_pen, &s->gb_blue);
+    hover(s, s->green_pen, &s->gb_green);
 }
 
 void paint(sfRenderWindow *window, Sprite_t *s)
@@ -42,8 +45,10 @@ void paint(sfRenderWindow *window, Sprite_t *s)
 
     s->pos = sfRenderWindow_mapPixelToCoords(window, mouse, NULL);
     sfRenderWindow_clear(window, sfColor_fromRGB(49, 54, 63));
+    get_global_bounds(s);
+    check_hover(s);
     while (sfRenderWindow_pollEvent(window, &event))
         event_click(window, event, s);
-    sfRenderWindow_drawSprite(window, s->background_s, NULL);
+    draw_square_sprites(window, s);
     sfRenderWindow_display(window);
 }

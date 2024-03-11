@@ -12,6 +12,7 @@ SRCLIB	=	lib/my_atoi.c 		\
 
 SRCNAME	=	src/main.c		\
 			src/paint.c		\
+			src/functions.c	\
 
 
 LIB 	= libmy.a
