@@ -13,10 +13,12 @@
     #define PAINT_H
 
 typedef struct Sprite {
-    sfVector2f mouse_pos;
-    sfRectangleShape *pixel;
-    sfRectangleShape *background;
+    sfImage* image;
+    sfTexture* background_t;
+    sfSprite* background_s;
+    sfVector2f pos;
     sfColor color;
+    int pixel_size;
 } Sprite_t;
 
 typedef struct St {

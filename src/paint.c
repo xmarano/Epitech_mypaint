@@ -6,38 +6,44 @@
 */
 #include "paint.h"
 
+void static draw2(Sprite_t *s, int i)
+{
+    for (int j = s->pos.y - s->pixel_size; j < s->pos.y + s->pixel_size; j++) {
+        if (i >= 220 && j >= 140 && i < 1220)
+            sfImage_setPixel(s->image, i - 220, j - 140, sfRed);
+    }
+}
+
 void draw(sfRenderWindow *window, Sprite_t *s)
 {
-    if (s->mouse_pos.x > 250 && s->mouse_pos.y > 150 &&
-        s->mouse_pos.x < 1180 && s->mouse_pos.y < 650) {
-        sfRectangleShape_setPosition(s->pixel, s->mouse_pos);
-        sfRenderWindow_drawRectangleShape(window, s->pixel, NULL);
-    }
+    for (int i = s->pos.x - s->pixel_size; i < s->pos.x + s->pixel_size; i++)
+        draw2(s, i);
+    sfTexture_updateFromImage(s->background_t, s->image, 0, 0);
 }
 
 void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
 {
-    if (event.type == sfEvtClosed)
+    if (event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyEscape))
         sfRenderWindow_close(window);
     if (sfKeyboard_isKeyPressed(sfKeySpace))
-        sfRenderWindow_drawRectangleShape(window, s->background, NULL);
+        sfRenderWindow_drawSprite(window, s->background_s, NULL);
     if (sfMouse_isButtonPressed(sfMouseLeft))
         draw(window, s);
-    if (sfKeyboard_isKeyPressed(sfKeyR))
-        sfRectangleShape_setFillColor(s->pixel, sfRed);
-    if (sfKeyboard_isKeyPressed(sfKeyB))
-        sfRectangleShape_setFillColor(s->pixel, sfBlue);
+    if (sfKeyboard_isKeyPressed(sfKeyDown) && s->pixel_size > 1)
+        s->pixel_size --;
+    if (sfKeyboard_isKeyPressed(sfKeyUp) && s->pixel_size < 100)
+        s->pixel_size++;
 }
 
 void paint(sfRenderWindow *window, Sprite_t *s)
 {
     sfEvent event;
     sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
-    sfVector2f brush = sfRenderWindow_mapPixelToCoords(window, mouse, NULL);
 
-    s->mouse_pos.x = (float)brush.x - 8;
-    s->mouse_pos.y = (float)brush.y - 8;
+    s->pos = sfRenderWindow_mapPixelToCoords(window, mouse, NULL);
+    sfRenderWindow_clear(window, sfColor_fromRGB(49, 54, 63));
     while (sfRenderWindow_pollEvent(window, &event))
         event_click(window, event, s);
+    sfRenderWindow_drawSprite(window, s->background_s, NULL);
     sfRenderWindow_display(window);
 }
