@@ -13,9 +13,9 @@
     #define PAINT_H
 
 typedef struct Sprite {
-    sfImage* image;
-    sfTexture* background_t;
-    sfSprite* background_s;
+    sfImage *image;
+    sfTexture *background_t;
+    sfSprite *background_s;
     sfVector2f pos;
     sfColor color;
     int pixel_size;
@@ -26,6 +26,10 @@ typedef struct Sprite {
     sfRectangleShape *green_pen;
     sfFloatRect gb_green;
     sfVector2f size;
+    sfRectangleShape *selected;
+    sfRectangleShape *hover;
+    sfSprite *save_s;
+    sfTexture *save_t;
 } Sprite_t;
 
 typedef struct St {

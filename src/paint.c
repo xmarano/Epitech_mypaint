@@ -17,14 +17,31 @@ void check_draw(sfRenderWindow *window, Sprite_t *s)
         s->color = sfGreen;
 }
 
+void save_click(sfRenderWindow *window, Sprite_t *s)
+{
+    sfFloatRect save_bounds = sfSprite_getGlobalBounds(s->save_s);
+    sfTexture* texture;
+    sfImage* image;
+
+    if (sfFloatRect_contains(&save_bounds, s->pos.x, s->pos.y)) {
+        texture = sfTexture_createFromImage(s->image, NULL);
+        image = sfTexture_copyToImage(texture);
+        sfImage_saveToFile(image, "draw.png");
+        sfImage_destroy(image);
+        sfTexture_destroy(texture);
+    }
+}
+
 void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
 {
     if (event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyEscape))
         sfRenderWindow_close(window);
     if (sfKeyboard_isKeyPressed(sfKeySpace))
         sfRenderWindow_drawSprite(window, s->background_s, NULL);
-    if (sfMouse_isButtonPressed(sfMouseLeft))
+    if (sfMouse_isButtonPressed(sfMouseLeft)) {
         check_draw(window, s);
+        save_click(window, s);
+    }
     if (sfKeyboard_isKeyPressed(sfKeyDown) && s->pixel_size > 1)
         s->pixel_size --;
     if (sfKeyboard_isKeyPressed(sfKeyUp) && s->pixel_size < 100)

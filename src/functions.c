@@ -8,9 +8,12 @@
 
 void draw_square_pen(Sprite_t *s, int i)
 {
+    sfVector2f sprite_pos = sfSprite_getPosition(s->background_s);
+
     for (int j = s->pos.y - s->pixel_size; j < s->pos.y + s->pixel_size; j++) {
-        if (i >= 220 && j >= 140 && i < 1220)
-            sfImage_setPixel(s->image, i - 220, j - 140, s->color);
+        if (i >= sprite_pos.x && j >= sprite_pos.y && i < sprite_pos.x + 1000)
+            sfImage_setPixel(s->image, i - sprite_pos.x,
+            j - sprite_pos.y, s->color);
     }
 }
 
@@ -31,6 +34,7 @@ void get_global_bounds(Sprite_t *s)
 void draw_square_sprites(sfRenderWindow *window, Sprite_t *s)
 {
     sfRenderWindow_drawSprite(window, s->background_s, NULL);
+    sfRenderWindow_drawSprite(window, s->save_s, NULL);
     sfRenderWindow_drawRectangleShape(window, s->red_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->blue_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->green_pen, NULL);
@@ -38,8 +42,22 @@ void draw_square_sprites(sfRenderWindow *window, Sprite_t *s)
 
 void hover(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect)
 {
-    if (sfFloatRect_contains(rect, s->pos.x, s->pos.y))
+    if (sfFloatRect_contains(rect, s->pos.x, s->pos.y)) {
         sfRectangleShape_setOutlineThickness(shape, 4);
-    else
-        sfRectangleShape_setOutlineThickness(shape, 0);
+        sfRectangleShape_setOutlineColor(shape, sfWhite);
+    }
+    if (sfFloatRect_contains(rect, s->pos.x, s->pos.y)
+    && sfMouse_isButtonPressed(sfMouseLeft)) {
+        sfRectangleShape_setOutlineThickness(shape, 4);
+        sfRectangleShape_setOutlineColor(shape, sfBlack);
+        s->selected = shape;
+    }
+    if (sfFloatRect_contains(rect, s->pos.x, s->pos.y) != 1) {
+        if (shape != s->selected)
+            sfRectangleShape_setOutlineThickness(shape, 0);
+        else {
+            sfRectangleShape_setOutlineThickness(shape, 4);
+            sfRectangleShape_setOutlineColor(shape, sfBlack);
+        }
+    }
 }

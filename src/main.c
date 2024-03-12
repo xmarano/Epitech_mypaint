@@ -6,7 +6,7 @@
 */
 #include "paint.h"
 
-void initialisation(Sprite_t *s)
+static void initialisation(Sprite_t *s)
 {
     s->image = sfImage_createFromColor(1000, 500, sfWhite);
     s->background_t = sfTexture_createFromImage(s->image, NULL);
@@ -16,8 +16,10 @@ void initialisation(Sprite_t *s)
     s->green_pen = sfRectangleShape_create();
     s->size.x = 50;
     s->size.y = 50;
-    s->pixel_size = 5;
+    s->pixel_size = 3;
     s->color = sfBlack;
+    s->save_t = sfTexture_createFromFile("assets/save.png", NULL);
+    s->save_s = sfSprite_create();
 }
 
 void set_square(sfRectangleShape *shape, sfVector2f size,
@@ -30,14 +32,20 @@ void set_square(sfRectangleShape *shape, sfVector2f size,
 
 void set_st(sfRenderWindow *window, Sprite_t *s)
 {
-    sfVector2u canvas_size = sfRenderWindow_getSize(window);
-    sfVector2f pos_c = {(canvas_size.x - 1000) / 2, (canvas_size.y - 500) / 2};
+    sfVector2u window_size = sfRenderWindow_getSize(window);
+    sfVector2f pos_c = {(window_size.x - 1000) / 2, (window_size.y - 500) / 2};
+    sfVector2u save_get_size = sfTexture_getSize(s->save_t);
+    sfVector2f save_size = {80.0f / save_get_size.x, 80.0f / save_get_size.y};
+    sfVector2f save_pos = {window_size.x - 100, 20};
 
     sfSprite_setTexture(s->background_s, s->background_t, sfTrue);
     sfSprite_setPosition(s->background_s, pos_c);
     set_square(s->red_pen, s->size, sfRed, (sfVector2f){10, 10});
     set_square(s->blue_pen, s->size, sfBlue, (sfVector2f){70, 10});
     set_square(s->green_pen, s->size, sfGreen, (sfVector2f){130, 10});
+    sfSprite_setTexture(s->save_s, s->save_t, sfTrue);
+    sfSprite_setScale(s->save_s, save_size);
+    sfSprite_setPosition(s->save_s, save_pos);
 }
 
 int main(int argc, char **argv)
