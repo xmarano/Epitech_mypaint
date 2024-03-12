@@ -40,9 +40,9 @@ void set_st(sfRenderWindow *window, Sprite_t *s)
 
     sfSprite_setTexture(s->background_s, s->background_t, sfTrue);
     sfSprite_setPosition(s->background_s, pos_c);
-    set_square(s->red_pen, s->size, sfRed, (sfVector2f){10, 10});
-    set_square(s->blue_pen, s->size, sfBlue, (sfVector2f){70, 10});
-    set_square(s->green_pen, s->size, sfGreen, (sfVector2f){130, 10});
+    set_square(s->red_pen, s->size, sfRed, (sfVector2f){50, 270});
+    set_square(s->blue_pen, s->size, sfBlue, (sfVector2f){120, 270});
+    set_square(s->green_pen, s->size, sfGreen, (sfVector2f){50, 340});
     sfSprite_setTexture(s->save_s, s->save_t, sfTrue);
     sfSprite_setScale(s->save_s, save_size);
     sfSprite_setPosition(s->save_s, save_pos);
