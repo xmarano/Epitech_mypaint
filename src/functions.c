@@ -31,9 +31,18 @@ void draw_square_sprites(sfRenderWindow *window, Sprite_t *s)
     sfRenderWindow_drawRectangleShape(window, s->red_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->blue_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->green_pen, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->cyan_pen, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->yellow_pen, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->magenta_pen, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->protanopie_pen, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->orange_pen, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->darkblue_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->file, NULL);
     sfRenderWindow_drawRectangleShape(window, s->edition, NULL);
     sfRenderWindow_drawRectangleShape(window, s->help, NULL);
+    sfRenderWindow_drawText(window, s->file_txt, NULL);
+    sfRenderWindow_drawText(window, s->edition_txt, NULL);
+    sfRenderWindow_drawText(window, s->help_txt, NULL);
 }
 
 sfRectangleShape *set_palette(Sprite_t *s, sfVector2f pos, sfColor color)
@@ -58,6 +67,20 @@ sfRectangleShape *set_button(Sprite_t *s, sfVector2f pos)
     return shape;
 }
 
+sfText *set_text(Sprite_t *s, sfVector2f pos, char *str)
+{
+    sfVector2f size = {90, 30};
+    sfText *text = sfText_create();
+    sfFont *font = sfFont_createFromFile("assets/text.ttf");
+
+    sfText_setFont(text, font);
+    sfText_setCharacterSize(text, 20);
+    sfText_setColor(text, sfBlack);
+    sfText_setString(text, str);
+    sfText_setPosition(text, pos);
+    return text;
+}
+
 void hover(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect)
 {
     if (sfFloatRect_contains(rect, s->pos.x, s->pos.y)) {
@@ -67,7 +90,7 @@ void hover(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect)
     if (sfFloatRect_contains(rect, s->pos.x, s->pos.y)
     && sfMouse_isButtonPressed(sfMouseLeft)) {
         sfRectangleShape_setOutlineThickness(shape, 4);
-        sfRectangleShape_setOutlineColor(shape, sfBlack);
+        sfRectangleShape_setOutlineColor(shape, s->grey);
         s->selected = shape;
     }
     if (sfFloatRect_contains(rect, s->pos.x, s->pos.y) != 1) {

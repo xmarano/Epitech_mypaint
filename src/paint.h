@@ -18,7 +18,6 @@ typedef struct Sprite {
     sfSprite *background_s;
     sfVector2f pos;
     sfColor color;
-    sfColor grey;
     int pixel_size;
     sfVector2f size;
     sfRectangleShape *selected;
@@ -34,14 +33,27 @@ typedef struct Sprite {
     sfRectangleShape *yellow_pen;
     sfRectangleShape *magenta_pen;
     sfRectangleShape *cyan_pen;
+    sfRectangleShape *orange_pen;
+    sfRectangleShape *protanopie_pen;
+    sfRectangleShape *darkblue_pen;
     sfFloatRect gb_red;
     sfFloatRect gb_blue;
     sfFloatRect gb_green;
     sfFloatRect gb_yellow;
     sfFloatRect gb_magenta;
     sfFloatRect gb_cyan;
+    sfFloatRect gb_orange;
+    sfFloatRect gb_protanopie;
+    sfFloatRect gb_darkblue;
+    sfColor grey;
+    sfColor light_grey;
+    sfColor orange;
+    sfColor protanopie;
+    sfColor darkblue;
+    sfText *file_txt;
+    sfText *edition_txt;
+    sfText *help_txt;
     sfFloatRect gb_file;
-
 } Sprite_t;
 
 typedef struct St {
@@ -52,6 +64,7 @@ void draw(sfRenderWindow *window, Sprite_t *s);
 void paint(sfRenderWindow *window, Sprite_t *s);
 void draw_square_sprites(sfRenderWindow *window, Sprite_t *s);
 void hover(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect);
-sfRectangleShape *set_button(Sprite_t *s, sfVector2f pos);
 sfRectangleShape *set_palette(Sprite_t *s, sfVector2f pos, sfColor color);
+sfRectangleShape *set_button(Sprite_t *s, sfVector2f pos);
+sfText *set_text(Sprite_t *s, sfVector2f pos, char *str);
 #endif

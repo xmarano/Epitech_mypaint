@@ -11,6 +11,12 @@ void get_global_bounds(Sprite_t *s)
     s->gb_red = sfRectangleShape_getGlobalBounds(s->red_pen);
     s->gb_blue = sfRectangleShape_getGlobalBounds(s->blue_pen);
     s->gb_green = sfRectangleShape_getGlobalBounds(s->green_pen);
+    s->gb_cyan = sfRectangleShape_getGlobalBounds(s->cyan_pen);
+    s->gb_magenta = sfRectangleShape_getGlobalBounds(s->magenta_pen);
+    s->gb_yellow = sfRectangleShape_getGlobalBounds(s->yellow_pen);
+    s->gb_orange = sfRectangleShape_getGlobalBounds(s->orange_pen);
+    s->gb_protanopie = sfRectangleShape_getGlobalBounds(s->protanopie_pen);
+    s->gb_darkblue = sfRectangleShape_getGlobalBounds(s->darkblue_pen);
 }
 
 void check_draw(sfRenderWindow *window, Sprite_t *s)
@@ -22,6 +28,18 @@ void check_draw(sfRenderWindow *window, Sprite_t *s)
         s->color = sfBlue;
     if (sfFloatRect_contains(&s->gb_green, s->pos.x, s->pos.y))
         s->color = sfGreen;
+    if (sfFloatRect_contains(&s->gb_cyan, s->pos.x, s->pos.y))
+        s->color = sfCyan;
+    if (sfFloatRect_contains(&s->gb_magenta, s->pos.x, s->pos.y))
+        s->color = sfMagenta;
+    if (sfFloatRect_contains(&s->gb_yellow, s->pos.x, s->pos.y))
+        s->color = sfYellow;
+    if (sfFloatRect_contains(&s->gb_orange, s->pos.x, s->pos.y))
+        s->color = sfColor_fromRGB(255, 149, 0);
+    if (sfFloatRect_contains(&s->gb_protanopie, s->pos.x, s->pos.y))
+        s->color = sfColor_fromRGB(0, 204, 153);
+    if (sfFloatRect_contains(&s->gb_darkblue, s->pos.x, s->pos.y))
+        s->color = sfColor_fromRGB(102, 0, 102);
 }
 
 void save_click(sfRenderWindow *window, Sprite_t *s)
@@ -60,6 +78,12 @@ void check_hover(Sprite_t *s)
     hover(s, s->red_pen, &s->gb_red);
     hover(s, s->blue_pen, &s->gb_blue);
     hover(s, s->green_pen, &s->gb_green);
+    hover(s, s->cyan_pen, &s->gb_cyan);
+    hover(s, s->yellow_pen, &s->gb_yellow);
+    hover(s, s->magenta_pen, &s->gb_magenta);
+    hover(s, s->orange_pen, &s->gb_orange);
+    hover(s, s->protanopie_pen, &s->gb_protanopie);
+    hover(s, s->darkblue_pen, &s->gb_darkblue);
 }
 
 void paint(sfRenderWindow *window, Sprite_t *s)
@@ -68,7 +92,7 @@ void paint(sfRenderWindow *window, Sprite_t *s)
     sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
 
     s->pos = sfRenderWindow_mapPixelToCoords(window, mouse, NULL);
-    sfRenderWindow_clear(window, sfColor_fromRGB(49, 54, 63));
+    sfRenderWindow_clear(window, s->light_grey);
     get_global_bounds(s);
     check_hover(s);
     while (sfRenderWindow_pollEvent(window, &event))

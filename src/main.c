@@ -15,7 +15,11 @@ static void initialisation(Sprite_t *s)
     s->color = sfBlack;
     s->save_t = sfTexture_createFromFile("assets/save.png", NULL);
     s->save_s = sfSprite_create();
-    s->grey = sfColor_fromRGB(252, 199, 46);
+    s->light_grey = sfColor_fromRGB(140, 140, 140);
+    s->grey = sfColor_fromRGB(109, 112, 124);
+    s->orange = sfColor_fromRGB(255, 149, 0);
+    s->protanopie = sfColor_fromRGB(0, 204, 153);
+    s->darkblue = sfColor_fromRGB(102, 0, 102);
 }
 
 void set_square(sfRectangleShape *shape, sfVector2f size,
@@ -45,7 +49,13 @@ void palette(sfRenderWindow *window, Sprite_t *s)
 {
     s->red_pen = set_palette(s, (sfVector2f){55, 270}, sfRed);
     s->blue_pen = set_palette(s, (sfVector2f){115, 270}, sfBlue);
-    s->green_pen = set_palette(s, (sfVector2f){55, 330}, sfGreen);
+    s->green_pen = set_palette(s, (sfVector2f){175, 270}, sfGreen);
+    s->magenta_pen = set_palette(s, (sfVector2f){55, 335}, sfMagenta);
+    s->yellow_pen = set_palette(s, (sfVector2f){115, 335}, sfYellow);
+    s->cyan_pen = set_palette(s, (sfVector2f){175, 335}, sfCyan);
+    s->orange_pen = set_palette(s, (sfVector2f){55, 400}, s->orange);
+    s->protanopie_pen = set_palette(s, (sfVector2f){115, 400}, s->protanopie);
+    s->darkblue_pen = set_palette(s, (sfVector2f){175, 400}, s->darkblue);
     return;
 }
 
@@ -54,6 +64,14 @@ void button(sfRenderWindow *window, Sprite_t *s)
     s->file = set_button(s, (sfVector2f){10, 10});
     s->edition = set_button(s, (sfVector2f){110, 10});
     s->help = set_button(s, (sfVector2f){210, 10});
+    return;
+}
+
+void text(sfRenderWindow *window, Sprite_t *s)
+{
+    s->file_txt = set_text(s, (sfVector2f){30, 12}, "File");
+    s->edition_txt = set_text(s, (sfVector2f){120, 12}, "Option");
+    s->help_txt = set_text(s, (sfVector2f){230, 12}, "Help");
     return;
 }
 
@@ -72,6 +90,7 @@ int main(int argc, char **argv)
     set_st(window, &s);
     palette(window, &s);
     button(window, &s);
+    text(window, &s);
     while (sfRenderWindow_isOpen(window))
         paint(window, &s);
     sfRenderWindow_destroy(window);
