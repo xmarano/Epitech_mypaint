@@ -19,7 +19,6 @@ static void initialisation(Sprite_t *s)
     s->grey = sfColor_fromRGB(109, 112, 124);
     s->orange = sfColor_fromRGB(255, 149, 0);
     s->protanopie = sfColor_fromRGB(0, 204, 153);
-    s->darkblue = sfColor_fromRGB(102, 0, 102);
 }
 
 void set_st(sfRenderWindow *window, Sprite_t *s)
@@ -47,7 +46,7 @@ void palette(sfRenderWindow *window, Sprite_t *s)
     s->cyan_pen = set_palette(s, (sfVector2f){115, 400}, sfCyan);
     s->orange_pen = set_palette(s, (sfVector2f){55, 465}, s->orange);
     s->protanopie_pen = set_palette(s, (sfVector2f){115, 465}, s->protanopie);
-    s->darkblue_pen = set_palette(s, (sfVector2f){55, 530}, s->darkblue);
+    s->black_pen = set_palette(s, (sfVector2f){55, 530}, sfBlack);
 }
 
 void button(sfRenderWindow *window, Sprite_t *s)

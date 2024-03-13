@@ -16,7 +16,7 @@ void static get_global_bounds(Sprite_t *s)
     s->gb_yellow = sfRectangleShape_getGlobalBounds(s->yellow_pen);
     s->gb_orange = sfRectangleShape_getGlobalBounds(s->orange_pen);
     s->gb_protanopie = sfRectangleShape_getGlobalBounds(s->protanopie_pen);
-    s->gb_darkblue = sfRectangleShape_getGlobalBounds(s->darkblue_pen);
+    s->gb_black = sfRectangleShape_getGlobalBounds(s->black_pen);
     s->gb_file = sfRectangleShape_getGlobalBounds(s->file);
     s->gb_edition = sfRectangleShape_getGlobalBounds(s->edition);
     s->gb_help = sfRectangleShape_getGlobalBounds(s->help);
@@ -40,8 +40,8 @@ void static check_color(sfRenderWindow *window, Sprite_t *s)
         s->color = sfColor_fromRGB(255, 149, 0);
     if (sfFloatRect_contains(&s->gb_protanopie, s->pos.x, s->pos.y))
         s->color = sfColor_fromRGB(0, 204, 153);
-    if (sfFloatRect_contains(&s->gb_darkblue, s->pos.x, s->pos.y))
-        s->color = sfColor_fromRGB(102, 0, 102);
+    if (sfFloatRect_contains(&s->gb_black, s->pos.x, s->pos.y))
+        s->color = sfColor_fromRGB(0, 0, 0);
 }
 
 void save_click(sfRenderWindow *window, Sprite_t *s)
@@ -86,7 +86,7 @@ void check_hover_color(Sprite_t *s)
     hover_color(s, s->magenta_pen, &s->gb_magenta);
     hover_color(s, s->orange_pen, &s->gb_orange);
     hover_color(s, s->protanopie_pen, &s->gb_protanopie);
-    hover_color(s, s->darkblue_pen, &s->gb_darkblue);
+    hover_color(s, s->black_pen, &s->gb_black);
 }
 
 void check_hover_button(Sprite_t *s)

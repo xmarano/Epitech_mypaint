@@ -35,7 +35,7 @@ typedef struct Sprite {
     sfRectangleShape *cyan_pen;
     sfRectangleShape *orange_pen;
     sfRectangleShape *protanopie_pen;
-    sfRectangleShape *darkblue_pen;
+    sfRectangleShape *black_pen;
     sfFloatRect gb_red;
     sfFloatRect gb_blue;
     sfFloatRect gb_green;
@@ -44,12 +44,11 @@ typedef struct Sprite {
     sfFloatRect gb_cyan;
     sfFloatRect gb_orange;
     sfFloatRect gb_protanopie;
-    sfFloatRect gb_darkblue;
+    sfFloatRect gb_black;
     sfColor grey;
     sfColor light_grey;
     sfColor orange;
     sfColor protanopie;
-    sfColor darkblue;
     sfText *file_txt;
     sfText *edition_txt;
     sfText *help_txt;
