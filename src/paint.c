@@ -19,9 +19,8 @@ void get_global_bounds(Sprite_t *s)
     s->gb_darkblue = sfRectangleShape_getGlobalBounds(s->darkblue_pen);
 }
 
-void check_draw(sfRenderWindow *window, Sprite_t *s)
+void check_color(sfRenderWindow *window, Sprite_t *s)
 {
-    draw(window, s);
     if (sfFloatRect_contains(&s->gb_red, s->pos.x, s->pos.y))
         s->color = sfRed;
     if (sfFloatRect_contains(&s->gb_blue, s->pos.x, s->pos.y))
@@ -64,7 +63,8 @@ void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
     if (sfKeyboard_isKeyPressed(sfKeySpace))
         sfRenderWindow_drawSprite(window, s->background_s, NULL);
     if (sfMouse_isButtonPressed(sfMouseLeft)) {
-        check_draw(window, s);
+        draw(window, s);
+        check_color(window, s);
         save_click(window, s);
     }
     if (sfKeyboard_isKeyPressed(sfKeyDown) && s->pixel_size > 1)

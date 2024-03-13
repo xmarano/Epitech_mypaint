@@ -49,14 +49,13 @@ void palette(sfRenderWindow *window, Sprite_t *s)
 {
     s->red_pen = set_palette(s, (sfVector2f){55, 270}, sfRed);
     s->blue_pen = set_palette(s, (sfVector2f){115, 270}, sfBlue);
-    s->green_pen = set_palette(s, (sfVector2f){175, 270}, sfGreen);
-    s->magenta_pen = set_palette(s, (sfVector2f){55, 335}, sfMagenta);
-    s->yellow_pen = set_palette(s, (sfVector2f){115, 335}, sfYellow);
-    s->cyan_pen = set_palette(s, (sfVector2f){175, 335}, sfCyan);
-    s->orange_pen = set_palette(s, (sfVector2f){55, 400}, s->orange);
-    s->protanopie_pen = set_palette(s, (sfVector2f){115, 400}, s->protanopie);
-    s->darkblue_pen = set_palette(s, (sfVector2f){175, 400}, s->darkblue);
-    return;
+    s->green_pen = set_palette(s, (sfVector2f){55, 335}, sfGreen);
+    s->magenta_pen = set_palette(s, (sfVector2f){115, 335}, sfMagenta);
+    s->yellow_pen = set_palette(s, (sfVector2f){55, 400}, sfYellow);
+    s->cyan_pen = set_palette(s, (sfVector2f){115, 400}, sfCyan);
+    s->orange_pen = set_palette(s, (sfVector2f){55, 465}, s->orange);
+    s->protanopie_pen = set_palette(s, (sfVector2f){115, 465}, s->protanopie);
+    s->darkblue_pen = set_palette(s, (sfVector2f){55, 530}, s->darkblue);
 }
 
 void button(sfRenderWindow *window, Sprite_t *s)
