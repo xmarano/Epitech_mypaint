@@ -24,13 +24,6 @@ void draw(sfRenderWindow *window, Sprite_t *s)
     sfTexture_updateFromImage(s->background_t, s->image, 0, 0);
 }
 
-void get_global_bounds(Sprite_t *s)
-{
-    s->gb_red = sfRectangleShape_getGlobalBounds(s->red_pen);
-    s->gb_blue = sfRectangleShape_getGlobalBounds(s->blue_pen);
-    s->gb_green = sfRectangleShape_getGlobalBounds(s->green_pen);
-}
-
 void draw_square_sprites(sfRenderWindow *window, Sprite_t *s)
 {
     sfRenderWindow_drawSprite(window, s->background_s, NULL);
@@ -38,6 +31,31 @@ void draw_square_sprites(sfRenderWindow *window, Sprite_t *s)
     sfRenderWindow_drawRectangleShape(window, s->red_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->blue_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->green_pen, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->file, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->edition, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->help, NULL);
+}
+
+sfRectangleShape *set_palette(Sprite_t *s, sfVector2f pos, sfColor color)
+{
+    sfVector2f size = {40, 40};
+    sfRectangleShape *shape = sfRectangleShape_create();
+
+    sfRectangleShape_setSize(shape, size);
+    sfRectangleShape_setFillColor(shape, color);
+    sfRectangleShape_setPosition(shape, pos);
+    return shape;
+}
+
+sfRectangleShape *set_button(Sprite_t *s, sfVector2f pos)
+{
+    sfVector2f size = {90, 30};
+    sfRectangleShape *shape = sfRectangleShape_create();
+
+    sfRectangleShape_setSize(shape, size);
+    sfRectangleShape_setFillColor(shape, s->grey);
+    sfRectangleShape_setPosition(shape, pos);
+    return shape;
 }
 
 void hover(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect)

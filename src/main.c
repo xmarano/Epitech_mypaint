@@ -11,15 +11,11 @@ static void initialisation(Sprite_t *s)
     s->image = sfImage_createFromColor(1000, 500, sfWhite);
     s->background_t = sfTexture_createFromImage(s->image, NULL);
     s->background_s = sfSprite_create();
-    s->red_pen = sfRectangleShape_create();
-    s->blue_pen = sfRectangleShape_create();
-    s->green_pen = sfRectangleShape_create();
-    s->size.x = 50;
-    s->size.y = 50;
     s->pixel_size = 3;
     s->color = sfBlack;
     s->save_t = sfTexture_createFromFile("assets/save.png", NULL);
     s->save_s = sfSprite_create();
+    s->grey = sfColor_fromRGB(252, 199, 46);
 }
 
 void set_square(sfRectangleShape *shape, sfVector2f size,
@@ -40,12 +36,25 @@ void set_st(sfRenderWindow *window, Sprite_t *s)
 
     sfSprite_setTexture(s->background_s, s->background_t, sfTrue);
     sfSprite_setPosition(s->background_s, pos_c);
-    set_square(s->red_pen, s->size, sfRed, (sfVector2f){50, 270});
-    set_square(s->blue_pen, s->size, sfBlue, (sfVector2f){120, 270});
-    set_square(s->green_pen, s->size, sfGreen, (sfVector2f){50, 340});
     sfSprite_setTexture(s->save_s, s->save_t, sfTrue);
     sfSprite_setScale(s->save_s, save_size);
     sfSprite_setPosition(s->save_s, save_pos);
+}
+
+void palette(sfRenderWindow *window, Sprite_t *s)
+{
+    s->red_pen = set_palette(s, (sfVector2f){55, 270}, sfRed);
+    s->blue_pen = set_palette(s, (sfVector2f){115, 270}, sfBlue);
+    s->green_pen = set_palette(s, (sfVector2f){55, 330}, sfGreen);
+    return;
+}
+
+void button(sfRenderWindow *window, Sprite_t *s)
+{
+    s->file = set_button(s, (sfVector2f){10, 10});
+    s->edition = set_button(s, (sfVector2f){110, 10});
+    s->help = set_button(s, (sfVector2f){210, 10});
+    return;
 }
 
 int main(int argc, char **argv)
@@ -61,6 +70,8 @@ int main(int argc, char **argv)
     sfRenderWindow_setFramerateLimit(window, 60);
     initialisation(&s);
     set_st(window, &s);
+    palette(window, &s);
+    button(window, &s);
     while (sfRenderWindow_isOpen(window))
         paint(window, &s);
     sfRenderWindow_destroy(window);

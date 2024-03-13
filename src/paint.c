@@ -6,6 +6,13 @@
 */
 #include "paint.h"
 
+void get_global_bounds(Sprite_t *s)
+{
+    s->gb_red = sfRectangleShape_getGlobalBounds(s->red_pen);
+    s->gb_blue = sfRectangleShape_getGlobalBounds(s->blue_pen);
+    s->gb_green = sfRectangleShape_getGlobalBounds(s->green_pen);
+}
+
 void check_draw(sfRenderWindow *window, Sprite_t *s)
 {
     draw(window, s);
@@ -26,7 +33,7 @@ void save_click(sfRenderWindow *window, Sprite_t *s)
     if (sfFloatRect_contains(&save_bounds, s->pos.x, s->pos.y)) {
         texture = sfTexture_createFromImage(s->image, NULL);
         image = sfTexture_copyToImage(texture);
-        sfImage_saveToFile(image, "draw.png");
+        sfImage_saveToFile(image, "draw.jpg");
         sfImage_destroy(image);
         sfTexture_destroy(texture);
     }
