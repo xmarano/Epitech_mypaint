@@ -24,6 +24,9 @@ typedef struct Sprite {
     sfRectangleShape *hover;
     sfSprite *save_s;
     sfTexture *save_t;
+    sfSprite *eraser_s;
+    sfTexture *eraser_t;
+    sfFloatRect gb_eraser;
     sfRectangleShape *file;
     sfRectangleShape *edition;
     sfRectangleShape *help;
@@ -52,9 +55,11 @@ typedef struct Sprite {
     sfText *file_txt;
     sfText *edition_txt;
     sfText *help_txt;
+    sfText *new_file_txt;
     sfFloatRect gb_file;
     sfFloatRect gb_edition;
     sfFloatRect gb_help;
+    sfFloatRect gb_new_file;
     sfRectangleShape *current;
 } Sprite_t;
 

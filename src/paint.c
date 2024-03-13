@@ -17,6 +17,7 @@ void static get_global_bounds(Sprite_t *s)
     s->gb_orange = sfRectangleShape_getGlobalBounds(s->orange_pen);
     s->gb_protanopie = sfRectangleShape_getGlobalBounds(s->protanopie_pen);
     s->gb_black = sfRectangleShape_getGlobalBounds(s->black_pen);
+    s->gb_eraser = sfSprite_getGlobalBounds(s->eraser_s);
     s->gb_file = sfRectangleShape_getGlobalBounds(s->file);
     s->gb_edition = sfRectangleShape_getGlobalBounds(s->edition);
     s->gb_help = sfRectangleShape_getGlobalBounds(s->help);
@@ -41,7 +42,9 @@ void static check_color(sfRenderWindow *window, Sprite_t *s)
     if (sfFloatRect_contains(&s->gb_protanopie, s->pos.x, s->pos.y))
         s->color = sfColor_fromRGB(0, 204, 153);
     if (sfFloatRect_contains(&s->gb_black, s->pos.x, s->pos.y))
-        s->color = sfColor_fromRGB(0, 0, 0);
+        s->color = sfBlack;
+    if (sfFloatRect_contains(&s->gb_eraser, s->pos.x, s->pos.y))
+        s->color = sfWhite;
 }
 
 void save_click(sfRenderWindow *window, Sprite_t *s)
