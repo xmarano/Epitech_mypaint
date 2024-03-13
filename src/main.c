@@ -22,14 +22,6 @@ static void initialisation(Sprite_t *s)
     s->darkblue = sfColor_fromRGB(102, 0, 102);
 }
 
-void set_square(sfRectangleShape *shape, sfVector2f size,
-    sfColor color, sfVector2f pos)
-{
-    sfRectangleShape_setSize(shape, size);
-    sfRectangleShape_setFillColor(shape, color);
-    sfRectangleShape_setPosition(shape, pos);
-}
-
 void set_st(sfRenderWindow *window, Sprite_t *s)
 {
     sfVector2u window_size = sfRenderWindow_getSize(window);

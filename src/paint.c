@@ -6,7 +6,7 @@
 */
 #include "paint.h"
 
-void get_global_bounds(Sprite_t *s)
+void static get_global_bounds(Sprite_t *s)
 {
     s->gb_red = sfRectangleShape_getGlobalBounds(s->red_pen);
     s->gb_blue = sfRectangleShape_getGlobalBounds(s->blue_pen);
@@ -17,9 +17,12 @@ void get_global_bounds(Sprite_t *s)
     s->gb_orange = sfRectangleShape_getGlobalBounds(s->orange_pen);
     s->gb_protanopie = sfRectangleShape_getGlobalBounds(s->protanopie_pen);
     s->gb_darkblue = sfRectangleShape_getGlobalBounds(s->darkblue_pen);
+    s->gb_file = sfRectangleShape_getGlobalBounds(s->file);
+    s->gb_edition = sfRectangleShape_getGlobalBounds(s->edition);
+    s->gb_help = sfRectangleShape_getGlobalBounds(s->help);
 }
 
-void check_color(sfRenderWindow *window, Sprite_t *s)
+void static check_color(sfRenderWindow *window, Sprite_t *s)
 {
     if (sfFloatRect_contains(&s->gb_red, s->pos.x, s->pos.y))
         s->color = sfRed;
@@ -73,17 +76,24 @@ void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
         s->pixel_size++;
 }
 
-void check_hover(Sprite_t *s)
+void check_hover_color(Sprite_t *s)
 {
-    hover(s, s->red_pen, &s->gb_red);
-    hover(s, s->blue_pen, &s->gb_blue);
-    hover(s, s->green_pen, &s->gb_green);
-    hover(s, s->cyan_pen, &s->gb_cyan);
-    hover(s, s->yellow_pen, &s->gb_yellow);
-    hover(s, s->magenta_pen, &s->gb_magenta);
-    hover(s, s->orange_pen, &s->gb_orange);
-    hover(s, s->protanopie_pen, &s->gb_protanopie);
-    hover(s, s->darkblue_pen, &s->gb_darkblue);
+    hover_color(s, s->red_pen, &s->gb_red);
+    hover_color(s, s->blue_pen, &s->gb_blue);
+    hover_color(s, s->green_pen, &s->gb_green);
+    hover_color(s, s->cyan_pen, &s->gb_cyan);
+    hover_color(s, s->yellow_pen, &s->gb_yellow);
+    hover_color(s, s->magenta_pen, &s->gb_magenta);
+    hover_color(s, s->orange_pen, &s->gb_orange);
+    hover_color(s, s->protanopie_pen, &s->gb_protanopie);
+    hover_color(s, s->darkblue_pen, &s->gb_darkblue);
+}
+
+void check_hover_button(Sprite_t *s)
+{
+    hover_button(s, s->file, &s->gb_file);
+    hover_button(s, s->edition, &s->gb_edition);
+    hover_button(s, s->help, &s->gb_help);
 }
 
 void paint(sfRenderWindow *window, Sprite_t *s)
@@ -94,9 +104,11 @@ void paint(sfRenderWindow *window, Sprite_t *s)
     s->pos = sfRenderWindow_mapPixelToCoords(window, mouse, NULL);
     sfRenderWindow_clear(window, s->light_grey);
     get_global_bounds(s);
-    check_hover(s);
+    check_hover_color(s);
+    check_hover_button(s);
     while (sfRenderWindow_pollEvent(window, &event))
         event_click(window, event, s);
-    draw_square_sprites(window, s);
+    draw_rect_colors(window, s);
+    draw_rect_buttons(window, s);
     sfRenderWindow_display(window);
 }

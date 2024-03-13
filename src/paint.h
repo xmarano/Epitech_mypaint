@@ -54,6 +54,9 @@ typedef struct Sprite {
     sfText *edition_txt;
     sfText *help_txt;
     sfFloatRect gb_file;
+    sfFloatRect gb_edition;
+    sfFloatRect gb_help;
+    sfRectangleShape *current;
 } Sprite_t;
 
 typedef struct St {
@@ -62,8 +65,10 @@ typedef struct St {
 void draw_square_pen(Sprite_t *s, int i);
 void draw(sfRenderWindow *window, Sprite_t *s);
 void paint(sfRenderWindow *window, Sprite_t *s);
-void draw_square_sprites(sfRenderWindow *window, Sprite_t *s);
-void hover(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect);
+void draw_rect_colors(sfRenderWindow *window, Sprite_t *s);
+void draw_rect_buttons(sfRenderWindow *window, Sprite_t *s);
+void hover_color(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect);
+void hover_button(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect);
 sfRectangleShape *set_palette(Sprite_t *s, sfVector2f pos, sfColor color);
 sfRectangleShape *set_button(Sprite_t *s, sfVector2f pos);
 sfText *set_text(Sprite_t *s, sfVector2f pos, char *str);

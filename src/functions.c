@@ -24,7 +24,7 @@ void draw(sfRenderWindow *window, Sprite_t *s)
     sfTexture_updateFromImage(s->background_t, s->image, 0, 0);
 }
 
-void draw_square_sprites(sfRenderWindow *window, Sprite_t *s)
+void draw_rect_colors(sfRenderWindow *window, Sprite_t *s)
 {
     sfRenderWindow_drawSprite(window, s->background_s, NULL);
     sfRenderWindow_drawSprite(window, s->save_s, NULL);
@@ -37,12 +37,6 @@ void draw_square_sprites(sfRenderWindow *window, Sprite_t *s)
     sfRenderWindow_drawRectangleShape(window, s->protanopie_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->orange_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->darkblue_pen, NULL);
-    sfRenderWindow_drawRectangleShape(window, s->file, NULL);
-    sfRenderWindow_drawRectangleShape(window, s->edition, NULL);
-    sfRenderWindow_drawRectangleShape(window, s->help, NULL);
-    sfRenderWindow_drawText(window, s->file_txt, NULL);
-    sfRenderWindow_drawText(window, s->edition_txt, NULL);
-    sfRenderWindow_drawText(window, s->help_txt, NULL);
 }
 
 sfRectangleShape *set_palette(Sprite_t *s, sfVector2f pos, sfColor color)
@@ -56,32 +50,7 @@ sfRectangleShape *set_palette(Sprite_t *s, sfVector2f pos, sfColor color)
     return shape;
 }
 
-sfRectangleShape *set_button(Sprite_t *s, sfVector2f pos)
-{
-    sfVector2f size = {90, 30};
-    sfRectangleShape *shape = sfRectangleShape_create();
-
-    sfRectangleShape_setSize(shape, size);
-    sfRectangleShape_setFillColor(shape, s->grey);
-    sfRectangleShape_setPosition(shape, pos);
-    return shape;
-}
-
-sfText *set_text(Sprite_t *s, sfVector2f pos, char *str)
-{
-    sfVector2f size = {90, 30};
-    sfText *text = sfText_create();
-    sfFont *font = sfFont_createFromFile("assets/text.ttf");
-
-    sfText_setFont(text, font);
-    sfText_setCharacterSize(text, 20);
-    sfText_setColor(text, sfBlack);
-    sfText_setString(text, str);
-    sfText_setPosition(text, pos);
-    return text;
-}
-
-void hover(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect)
+void hover_color(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect)
 {
     if (sfFloatRect_contains(rect, s->pos.x, s->pos.y)) {
         sfRectangleShape_setOutlineThickness(shape, 4);
