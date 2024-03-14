@@ -98,3 +98,13 @@ void save_click(sfRenderWindow *window, Sprite_t *s)
         save_image(window, s, ".bmp");
     }
 }
+
+void new_click(sfRenderWindow *window, Sprite_t *s)
+{
+    sfImage *new_file;
+
+    if (sfFloatRect_contains(&s->gb_new_file, s->pos.x, s->pos.y)) {
+        new_file = sfImage_createFromColor(1000, 500, sfTransparent);
+        s->image = new_file;
+    }
+}

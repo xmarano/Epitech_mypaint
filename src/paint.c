@@ -58,14 +58,13 @@ void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
 {
     if (event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyEscape))
         sfRenderWindow_close(window);
-    if (sfKeyboard_isKeyPressed(sfKeySpace))
-        sfRenderWindow_drawSprite(window, s->background_s, NULL);
     if (sfMouse_isButtonPressed(sfMouseLeft)) {
         draw(window, s);
         check_color(window, s);
         check_menu(window, s);
         save_click(window, s);
         open_click(window, s);
+        new_click(window, s);
     }
     if (sfKeyboard_isKeyPressed(sfKeyDown) && s->pixel_size > 1)
         s->pixel_size --;

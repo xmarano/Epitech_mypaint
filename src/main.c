@@ -8,7 +8,10 @@
 
 static void initialisation(Sprite_t *s)
 {
-    s->image = sfImage_createFromColor(1000, 500, sfWhite);
+    s->white_back = sfImage_createFromColor(1000, 500, sfWhite);
+    s->white_back_t = sfTexture_createFromImage(s->white_back, NULL);
+    s->white_back_s = sfSprite_create();
+    s->image = sfImage_createFromColor(1000, 500, sfTransparent);
     s->background_t = sfTexture_createFromImage(s->image, NULL);
     s->background_s = sfSprite_create();
     s->pixel_size = 3;
@@ -33,6 +36,8 @@ void set_st(sfRenderWindow *window, Sprite_t *s)
     sfVector2f eraser_size = {42.0f / eraser_get.x, 40.0f / eraser_get.y};
     sfVector2f eraser_pos = {115, 530};
 
+    sfSprite_setTexture(s->white_back_s, s->white_back_t, sfTrue);
+    sfSprite_setPosition(s->white_back_s, pos_c);
     sfSprite_setTexture(s->background_s, s->background_t, sfTrue);
     sfSprite_setPosition(s->background_s, pos_c);
     sfSprite_setTexture(s->eraser_s, s->eraser_t, sfTrue);

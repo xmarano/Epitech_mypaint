@@ -13,6 +13,9 @@
     #define PAINT_H
 
 typedef struct Sprite {
+    sfImage *white_back;
+    sfTexture *white_back_t;
+    sfSprite *white_back_s;
     sfImage *image;
     sfTexture *background_t;
     sfSprite *background_s;
@@ -102,4 +105,5 @@ void check_submenu(sfRenderWindow *window, Sprite_t *s);
 void save_click(sfRenderWindow *window, Sprite_t *s);
 void open_click(sfRenderWindow *window, Sprite_t *s);
 void name_file(sfRenderWindow *window, Sprite_t *s);
+void new_click(sfRenderWindow *window, Sprite_t *s);
 #endif
