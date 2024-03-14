@@ -21,6 +21,12 @@ void static get_global_bounds(Sprite_t *s)
     s->gb_file = sfRectangleShape_getGlobalBounds(s->file);
     s->gb_edition = sfRectangleShape_getGlobalBounds(s->edition);
     s->gb_help = sfRectangleShape_getGlobalBounds(s->help);
+    s->gb_new_file = sfRectangleShape_getGlobalBounds(s->new_file);
+    s->gb_open = sfRectangleShape_getGlobalBounds(s->open);
+    s->gb_save = sfRectangleShape_getGlobalBounds(s->save);
+    s->gb_jpg = sfRectangleShape_getGlobalBounds(s->jpg);
+    s->gb_png = sfRectangleShape_getGlobalBounds(s->png);
+    s->gb_bmp = sfRectangleShape_getGlobalBounds(s->bmp);
 }
 
 void static check_color(sfRenderWindow *window, Sprite_t *s)
@@ -47,21 +53,6 @@ void static check_color(sfRenderWindow *window, Sprite_t *s)
         s->color = sfWhite;
 }
 
-void save_click(sfRenderWindow *window, Sprite_t *s)
-{
-    sfFloatRect save_bounds = sfSprite_getGlobalBounds(s->save_s);
-    sfTexture* texture;
-    sfImage* image;
-
-    if (sfFloatRect_contains(&save_bounds, s->pos.x, s->pos.y)) {
-        texture = sfTexture_createFromImage(s->image, NULL);
-        image = sfTexture_copyToImage(texture);
-        sfImage_saveToFile(image, "draw.jpg");
-        sfImage_destroy(image);
-        sfTexture_destroy(texture);
-    }
-}
-
 void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
 {
     if (event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyEscape))
@@ -71,7 +62,9 @@ void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
     if (sfMouse_isButtonPressed(sfMouseLeft)) {
         draw(window, s);
         check_color(window, s);
-        save_click(window, s);
+        check_menu(window, s);
+        //save_click(window, s);
+        open_click(window, s);
     }
     if (sfKeyboard_isKeyPressed(sfKeyDown) && s->pixel_size > 1)
         s->pixel_size --;
@@ -97,6 +90,12 @@ void check_hover_button(Sprite_t *s)
     hover_button(s, s->file, &s->gb_file);
     hover_button(s, s->edition, &s->gb_edition);
     hover_button(s, s->help, &s->gb_help);
+    hover_button(s, s->new_file, &s->gb_new_file);
+    hover_button(s, s->open, &s->gb_open);
+    hover_button(s, s->save, &s->gb_save);
+    hover_button(s, s->jpg, &s->gb_jpg);
+    hover_button(s, s->png, &s->gb_png);
+    hover_button(s, s->bmp, &s->gb_bmp);
 }
 
 void paint(sfRenderWindow *window, Sprite_t *s)

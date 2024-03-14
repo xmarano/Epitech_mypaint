@@ -6,6 +6,31 @@
 */
 #include "paint.h"
 
+static void draw_save_choice(sfRenderWindow *window, Sprite_t *s)
+{
+    if (s->menu1 % 2 != 0 && s->check_save % 2 != 0) {
+        sfRenderWindow_drawRectangleShape(window, s->jpg, NULL);
+        sfRenderWindow_drawRectangleShape(window, s->png, NULL);
+        sfRenderWindow_drawRectangleShape(window, s->bmp, NULL);
+        sfRenderWindow_drawText(window, s->jpg_txt, NULL);
+        sfRenderWindow_drawText(window, s->png_txt, NULL);
+        sfRenderWindow_drawText(window, s->bmp_txt, NULL);
+    }
+}
+
+static void draw_submenu(sfRenderWindow *window, Sprite_t *s)
+{
+    if (s->menu1 % 2 != 0) {
+        sfRenderWindow_drawRectangleShape(window, s->new_file, NULL);
+        sfRenderWindow_drawText(window, s->new_file_txt, NULL);
+        sfRenderWindow_drawRectangleShape(window, s->open, NULL);
+        sfRenderWindow_drawText(window, s->open_txt, NULL);
+        sfRenderWindow_drawRectangleShape(window, s->save, NULL);
+        sfRenderWindow_drawText(window, s->save_txt, NULL);
+    }
+
+}
+
 void draw_rect_buttons(sfRenderWindow *window, Sprite_t *s)
 {
     sfRenderWindow_drawRectangleShape(window, s->file, NULL);
@@ -14,6 +39,8 @@ void draw_rect_buttons(sfRenderWindow *window, Sprite_t *s)
     sfRenderWindow_drawText(window, s->file_txt, NULL);
     sfRenderWindow_drawText(window, s->edition_txt, NULL);
     sfRenderWindow_drawText(window, s->help_txt, NULL);
+    draw_submenu(window, s);
+    draw_save_choice(window, s);
 }
 
 sfRectangleShape *set_button(Sprite_t *s, sfVector2f pos)
@@ -39,6 +66,30 @@ sfText *set_text(Sprite_t *s, sfVector2f pos, char *str)
     sfText_setString(text, str);
     sfText_setPosition(text, pos);
     return text;
+}
+
+void check_menu(sfRenderWindow *window, Sprite_t *s)
+{
+    if (sfFloatRect_contains(&s->gb_file, s->pos.x, s->pos.y)) {
+        s->menu1++;
+        s->menu2 = 0;
+        s->menu3 = 0;
+        s->check_save = 0;
+    }
+    if (sfFloatRect_contains(&s->gb_edition, s->pos.x, s->pos.y)) {
+        s->menu1 = 0;
+        s->menu2++;
+        s->menu3 = 0;
+        s->check_save = 0;
+    }
+    if (sfFloatRect_contains(&s->gb_help, s->pos.x, s->pos.y)) {
+        s->menu1 = 0;
+        s->menu2 = 0;
+        s->menu3++;
+        s->check_save = 0;
+    }
+    if (sfFloatRect_contains(&s->gb_save, s->pos.x, s->pos.y))
+        s->check_save++;
 }
 
 void hover_button(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect)

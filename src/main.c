@@ -21,6 +21,10 @@ static void initialisation(Sprite_t *s)
     s->grey = sfColor_fromRGB(109, 112, 124);
     s->orange = sfColor_fromRGB(255, 149, 0);
     s->protanopie = sfColor_fromRGB(0, 204, 153);
+    s->menu1 = 0;
+    s->menu2 = 0;
+    s->menu3 = 0;
+    s->check_save = 0;
 }
 
 void set_st(sfRenderWindow *window, Sprite_t *s)
@@ -62,6 +66,12 @@ void button(sfRenderWindow *window, Sprite_t *s)
     s->file = set_button(s, (sfVector2f){10, 10});
     s->edition = set_button(s, (sfVector2f){110, 10});
     s->help = set_button(s, (sfVector2f){210, 10});
+    s->new_file = set_button(s, (sfVector2f){10, 50});
+    s->open = set_button(s, (sfVector2f){10, 90});
+    s->save = set_button(s, (sfVector2f){10, 130});
+    s->jpg = set_button(s, (sfVector2f){110, 130});
+    s->png = set_button(s, (sfVector2f){110, 170});
+    s->bmp = set_button(s, (sfVector2f){110, 210});
     return;
 }
 
@@ -70,6 +80,12 @@ void text(sfRenderWindow *window, Sprite_t *s)
     s->file_txt = set_text(s, (sfVector2f){30, 12}, "File");
     s->edition_txt = set_text(s, (sfVector2f){120, 12}, "Option");
     s->help_txt = set_text(s, (sfVector2f){230, 12}, "Help");
+    s->new_file_txt = set_text(s, (sfVector2f){20, 52}, "New...");
+    s->open_txt = set_text(s, (sfVector2f){15, 92}, "Open...");
+    s->save_txt = set_text(s, (sfVector2f){15, 132}, "Save...");
+    s->jpg_txt = set_text(s, (sfVector2f){115, 132}, ".jpg");
+    s->png_txt = set_text(s, (sfVector2f){115, 172}, ".png");
+    s->bmp_txt = set_text(s, (sfVector2f){115, 212}, ".bmp");
     return;
 }
 

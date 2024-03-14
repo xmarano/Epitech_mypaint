@@ -27,9 +27,6 @@ typedef struct Sprite {
     sfSprite *eraser_s;
     sfTexture *eraser_t;
     sfFloatRect gb_eraser;
-    sfRectangleShape *file;
-    sfRectangleShape *edition;
-    sfRectangleShape *help;
     sfRectangleShape *red_pen;
     sfRectangleShape *blue_pen;
     sfRectangleShape *green_pen;
@@ -52,15 +49,38 @@ typedef struct Sprite {
     sfColor light_grey;
     sfColor orange;
     sfColor protanopie;
+    sfRectangleShape *file;
+    sfRectangleShape *edition;
+    sfRectangleShape *help;
+    sfRectangleShape *new_file;
+    sfRectangleShape *open;
+    sfRectangleShape *save;
+    int check_save;
+    sfRectangleShape *jpg;
+    sfRectangleShape *png;
+    sfRectangleShape *bmp;
     sfText *file_txt;
     sfText *edition_txt;
     sfText *help_txt;
     sfText *new_file_txt;
+    sfText *open_txt;
+    sfText *save_txt;
+    sfText *jpg_txt;
+    sfText *png_txt;
+    sfText *bmp_txt;
     sfFloatRect gb_file;
     sfFloatRect gb_edition;
     sfFloatRect gb_help;
     sfFloatRect gb_new_file;
+    sfFloatRect gb_open;
+    sfFloatRect gb_save;
+    sfFloatRect gb_jpg;
+    sfFloatRect gb_png;
+    sfFloatRect gb_bmp;
     sfRectangleShape *current;
+    int menu1;
+    int menu2;
+    int menu3;
 } Sprite_t;
 
 typedef struct St {
@@ -76,4 +96,8 @@ void hover_button(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect);
 sfRectangleShape *set_palette(Sprite_t *s, sfVector2f pos, sfColor color);
 sfRectangleShape *set_button(Sprite_t *s, sfVector2f pos);
 sfText *set_text(Sprite_t *s, sfVector2f pos, char *str);
+void check_menu(sfRenderWindow *window, Sprite_t *s);
+void check_submenu(sfRenderWindow *window, Sprite_t *s);
+void save_click(sfRenderWindow *window, Sprite_t *s);
+void open_click(sfRenderWindow *window, Sprite_t *s);
 #endif
