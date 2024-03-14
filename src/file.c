@@ -79,19 +79,19 @@ void name_file(sfRenderWindow *window, Sprite_t *s)
 
 void save_click(sfRenderWindow *window, Sprite_t *s)
 {
-    if (s->check_save != 0 &&
+    if (s->check_save != 0 && s->menu1 % 2 != 0 &&
     sfFloatRect_contains(&s->gb_jpg, s->pos.x, s->pos.y)) {
         my_printf("\x1b[38;5;208m" "Name of the file to save : " "\x1b[0m");
         name_file(window, s);
         save_image(window, s, ".jpg");
     }
-    if (s->check_save != 0 &&
+    if (s->check_save != 0 && s->menu1 % 2 != 0 &&
     sfFloatRect_contains(&s->gb_png, s->pos.x, s->pos.y)) {
         my_printf("\x1b[38;5;208m" "Name of the file to save : " "\x1b[0m");
         name_file(window, s);
         save_image(window, s, ".png");
     }
-    if (s->check_save != 0 &&
+    if (s->check_save != 0 && s->menu1 % 2 != 0 &&
     sfFloatRect_contains(&s->gb_bmp, s->pos.x, s->pos.y)) {
         my_printf("\x1b[38;5;208m" "Name of the file to save : " "\x1b[0m");
         name_file(window, s);
@@ -103,7 +103,8 @@ void new_click(sfRenderWindow *window, Sprite_t *s)
 {
     sfImage *new_file;
 
-    if (sfFloatRect_contains(&s->gb_new_file, s->pos.x, s->pos.y)) {
+    if (s->menu1 % 2 != 0 &&
+    sfFloatRect_contains(&s->gb_new_file, s->pos.x, s->pos.y)) {
         new_file = sfImage_createFromColor(1000, 500, sfTransparent);
         s->image = new_file;
     }
