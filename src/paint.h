@@ -22,8 +22,6 @@ typedef struct Sprite {
     sfVector2f size;
     sfRectangleShape *selected;
     sfRectangleShape *hover;
-    sfSprite *save_s;
-    sfTexture *save_t;
     sfSprite *eraser_s;
     sfTexture *eraser_t;
     sfFloatRect gb_eraser;
@@ -81,6 +79,7 @@ typedef struct Sprite {
     int menu1;
     int menu2;
     int menu3;
+    char *filename;
 } Sprite_t;
 
 typedef struct St {
@@ -100,4 +99,5 @@ void check_menu(sfRenderWindow *window, Sprite_t *s);
 void check_submenu(sfRenderWindow *window, Sprite_t *s);
 void save_click(sfRenderWindow *window, Sprite_t *s);
 void open_click(sfRenderWindow *window, Sprite_t *s);
+void name_file(sfRenderWindow *window, Sprite_t *s);
 #endif

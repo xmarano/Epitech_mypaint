@@ -9,13 +9,18 @@ SRCLIB	=	lib/my_atoi.c 		\
 			lib/my_inttostr.c	\
 			lib/my_strlen.c 	\
 			lib/my_strcmp.c 	\
+			lib/my_strcat.c 	\
+			lib/my_printf.c 	\
+			lib/my_put_nbr.c 	\
+			lib/my_put_nbr_recursive.c 	\
+			lib/my_putstr.c 	\
+			lib/my_putchar.c 	\
 
 SRCNAME	=	src/main.c		\
 			src/paint.c		\
 			src/functions.c	\
 			src/functions_buttons.c	\
-			src/open.c	\
-			src/save.c	\
+			src/file.c	\
 
 
 LIB 	= libmy.a

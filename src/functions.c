@@ -27,7 +27,6 @@ void draw(sfRenderWindow *window, Sprite_t *s)
 void draw_rect_colors(sfRenderWindow *window, Sprite_t *s)
 {
     sfRenderWindow_drawSprite(window, s->background_s, NULL);
-    sfRenderWindow_drawSprite(window, s->save_s, NULL);
     sfRenderWindow_drawSprite(window, s->eraser_s, NULL);
     sfRenderWindow_drawRectangleShape(window, s->red_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->blue_pen, NULL);

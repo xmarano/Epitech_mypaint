@@ -63,7 +63,7 @@ void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
         draw(window, s);
         check_color(window, s);
         check_menu(window, s);
-        //save_click(window, s);
+        save_click(window, s);
         open_click(window, s);
     }
     if (sfKeyboard_isKeyPressed(sfKeyDown) && s->pixel_size > 1)

@@ -13,8 +13,6 @@ static void initialisation(Sprite_t *s)
     s->background_s = sfSprite_create();
     s->pixel_size = 3;
     s->color = sfBlack;
-    s->save_t = sfTexture_createFromFile("assets/save.png", NULL);
-    s->save_s = sfSprite_create();
     s->eraser_t = sfTexture_createFromFile("assets/eraser.png", NULL);
     s->eraser_s = sfSprite_create();
     s->light_grey = sfColor_fromRGB(140, 140, 140);
@@ -31,18 +29,12 @@ void set_st(sfRenderWindow *window, Sprite_t *s)
 {
     sfVector2u window_size = sfRenderWindow_getSize(window);
     sfVector2f pos_c = {(window_size.x - 1000) / 2, (window_size.y - 500) / 2};
-    sfVector2u save_get_size = sfTexture_getSize(s->save_t);
-    sfVector2f save_size = {80.0f / save_get_size.x, 80.0f / save_get_size.y};
-    sfVector2f save_pos = {window_size.x - 100, 20};
     sfVector2u eraser_get = sfTexture_getSize(s->eraser_t);
     sfVector2f eraser_size = {45.0f / eraser_get.x, 42.0f / eraser_get.y};
     sfVector2f eraser_pos = {115, 530};
 
     sfSprite_setTexture(s->background_s, s->background_t, sfTrue);
     sfSprite_setPosition(s->background_s, pos_c);
-    sfSprite_setTexture(s->save_s, s->save_t, sfTrue);
-    sfSprite_setScale(s->save_s, save_size);
-    sfSprite_setPosition(s->save_s, save_pos);
     sfSprite_setTexture(s->eraser_s, s->eraser_t, sfTrue);
     sfSprite_setScale(s->eraser_s, eraser_size);
     sfSprite_setPosition(s->eraser_s, eraser_pos);

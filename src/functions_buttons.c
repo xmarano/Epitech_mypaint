@@ -28,7 +28,6 @@ static void draw_submenu(sfRenderWindow *window, Sprite_t *s)
         sfRenderWindow_drawRectangleShape(window, s->save, NULL);
         sfRenderWindow_drawText(window, s->save_txt, NULL);
     }
-
 }
 
 void draw_rect_buttons(sfRenderWindow *window, Sprite_t *s)
