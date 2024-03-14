@@ -17,6 +17,7 @@ void static get_global_bounds(Sprite_t *s)
     s->gb_orange = sfRectangleShape_getGlobalBounds(s->orange_pen);
     s->gb_protanopie = sfRectangleShape_getGlobalBounds(s->protanopie_pen);
     s->gb_black = sfRectangleShape_getGlobalBounds(s->black_pen);
+    s->gb_transparent = sfRectangleShape_getGlobalBounds(s->transparent);
     s->gb_eraser = sfSprite_getGlobalBounds(s->eraser_s);
     s->gb_file = sfRectangleShape_getGlobalBounds(s->file);
     s->gb_edition = sfRectangleShape_getGlobalBounds(s->edition);
@@ -83,6 +84,7 @@ void check_hover_color(Sprite_t *s)
     hover_color(s, s->orange_pen, &s->gb_orange);
     hover_color(s, s->protanopie_pen, &s->gb_protanopie);
     hover_color(s, s->black_pen, &s->gb_black);
+    hover_color(s, s->transparent, &s->gb_transparent);
 }
 
 void check_hover_button(Sprite_t *s)

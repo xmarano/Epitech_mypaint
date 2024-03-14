@@ -30,7 +30,7 @@ void set_st(sfRenderWindow *window, Sprite_t *s)
     sfVector2u window_size = sfRenderWindow_getSize(window);
     sfVector2f pos_c = {(window_size.x - 1000) / 2, (window_size.y - 500) / 2};
     sfVector2u eraser_get = sfTexture_getSize(s->eraser_t);
-    sfVector2f eraser_size = {45.0f / eraser_get.x, 42.0f / eraser_get.y};
+    sfVector2f eraser_size = {42.0f / eraser_get.x, 40.0f / eraser_get.y};
     sfVector2f eraser_pos = {115, 530};
 
     sfSprite_setTexture(s->background_s, s->background_t, sfTrue);
@@ -51,6 +51,7 @@ void palette(sfRenderWindow *window, Sprite_t *s)
     s->orange_pen = set_palette(s, (sfVector2f){55, 465}, s->orange);
     s->protanopie_pen = set_palette(s, (sfVector2f){115, 465}, s->protanopie);
     s->black_pen = set_palette(s, (sfVector2f){55, 530}, sfBlack);
+    s->transparent = set_palette(s, (sfVector2f){115, 530}, sfTransparent);
 }
 
 void button(sfRenderWindow *window, Sprite_t *s)

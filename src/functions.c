@@ -37,6 +37,7 @@ void draw_rect_colors(sfRenderWindow *window, Sprite_t *s)
     sfRenderWindow_drawRectangleShape(window, s->protanopie_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->orange_pen, NULL);
     sfRenderWindow_drawRectangleShape(window, s->black_pen, NULL);
+    sfRenderWindow_drawRectangleShape(window, s->transparent, NULL);
 }
 
 sfRectangleShape *set_palette(Sprite_t *s, sfVector2f pos, sfColor color)
