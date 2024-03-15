@@ -6,22 +6,27 @@
 */
 #include "paint.h"
 
-void draw_square_pen(Sprite_t *s, int i)
+void edition_click(sfRenderWindow *window, Sprite_t *s)
 {
-    sfVector2f sprite_pos = sfSprite_getPosition(s->background_s);
-
-    for (int j = s->pos.y - s->pixel_size; j < s->pos.y + s->pixel_size; j++) {
-        if (i >= sprite_pos.x && j >= sprite_pos.y && i < sprite_pos.x + 1000)
-            sfImage_setPixel(s->image, i - sprite_pos.x,
-            j - sprite_pos.y, s->color);
+    if (s->menu2 == 1) {
+        if (sfFloatRect_contains(&s->gb_plus, s->pos.x, s->pos.y)
+        && s->pixel_size < 75)
+            s->pixel_size = s->pixel_size + 2;
+        if (sfFloatRect_contains(&s->gb_moins, s->pos.x, s->pos.y)
+        && s->pixel_size > 1)
+            s->pixel_size = s->pixel_size - 2;
+        if (sfFloatRect_contains(&s->gb_eraserb, s->pos.x, s->pos.y))
+            s->color = sfTransparent;
+        if (sfFloatRect_contains(&s->gb_square, s->pos.x, s->pos.y)) {
+            s->pen = 1;
+            s->color = sfBlack;
+        }
+        if (sfFloatRect_contains(&s->gb_circle, s->pos.x, s->pos.y)) {
+            s->pen = 0;
+            s->color = sfBlack;
+        }
     }
-}
-
-void draw(sfRenderWindow *window, Sprite_t *s)
-{
-    for (int i = s->pos.x - s->pixel_size; i < s->pos.x + s->pixel_size; i++)
-        draw_square_pen(s, i);
-    sfTexture_updateFromImage(s->background_t, s->image, 0, 0);
+    return;
 }
 
 void draw_rect_colors(sfRenderWindow *window, Sprite_t *s)

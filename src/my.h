@@ -11,6 +11,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdarg.h>
+#include <stdbool.h>
+#include <math.h>
 #ifndef MY_H
     #define MY_H
 int my_atoi(char *str);

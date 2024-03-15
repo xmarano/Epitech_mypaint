@@ -6,6 +6,16 @@
 */
 #include "paint.h"
 
+void static get_global_bounds2(Sprite_t *s)
+{
+    s->gb_bmp = sfRectangleShape_getGlobalBounds(s->bmp);
+    s->gb_plus = sfRectangleShape_getGlobalBounds(s->plus);
+    s->gb_moins = sfRectangleShape_getGlobalBounds(s->moins);
+    s->gb_eraserb = sfRectangleShape_getGlobalBounds(s->eraser);
+    s->gb_square = sfRectangleShape_getGlobalBounds(s->square);
+    s->gb_circle = sfRectangleShape_getGlobalBounds(s->circle);
+}
+
 void static get_global_bounds(Sprite_t *s)
 {
     s->gb_red = sfRectangleShape_getGlobalBounds(s->red_pen);
@@ -27,7 +37,7 @@ void static get_global_bounds(Sprite_t *s)
     s->gb_save = sfRectangleShape_getGlobalBounds(s->save);
     s->gb_jpg = sfRectangleShape_getGlobalBounds(s->jpg);
     s->gb_png = sfRectangleShape_getGlobalBounds(s->png);
-    s->gb_bmp = sfRectangleShape_getGlobalBounds(s->bmp);
+    get_global_bounds2(s);
 }
 
 void static check_color(sfRenderWindow *window, Sprite_t *s)
@@ -62,13 +72,18 @@ void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
         draw(window, s);
         check_color(window, s);
         check_menu(window, s);
+        edition_click(window, s);
         save_click(window, s);
         open_click(window, s);
         new_click(window, s);
     }
+    if (sfKeyboard_isKeyPressed(sfKeyRight))
+        s->pen = 1;
+    if (sfKeyboard_isKeyPressed(sfKeyLeft))
+        s->pen = 0;
     if (sfKeyboard_isKeyPressed(sfKeyDown) && s->pixel_size > 1)
-        s->pixel_size --;
-    if (sfKeyboard_isKeyPressed(sfKeyUp) && s->pixel_size < 100)
+        s->pixel_size--;
+    if (sfKeyboard_isKeyPressed(sfKeyUp) && s->pixel_size < 75)
         s->pixel_size++;
 }
 
@@ -97,6 +112,11 @@ void check_hover_button(Sprite_t *s)
     hover_button(s, s->jpg, &s->gb_jpg);
     hover_button(s, s->png, &s->gb_png);
     hover_button(s, s->bmp, &s->gb_bmp);
+    hover_button(s, s->plus, &s->gb_plus);
+    hover_button(s, s->moins, &s->gb_moins);
+    hover_button(s, s->eraser, &s->gb_eraserb);
+    hover_button(s, s->square, &s->gb_square);
+    hover_button(s, s->circle, &s->gb_circle);
 }
 
 void paint(sfRenderWindow *window, Sprite_t *s)

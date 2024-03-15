@@ -26,6 +26,7 @@ static void initialisation(Sprite_t *s)
     s->menu2 = 0;
     s->menu3 = 0;
     s->check_save = 0;
+    s->pen = 0;
 }
 
 void set_st(sfRenderWindow *window, Sprite_t *s)
@@ -56,7 +57,7 @@ void palette(sfRenderWindow *window, Sprite_t *s)
     s->orange_pen = set_palette(s, (sfVector2f){55, 465}, s->orange);
     s->protanopie_pen = set_palette(s, (sfVector2f){115, 465}, s->protanopie);
     s->black_pen = set_palette(s, (sfVector2f){55, 530}, sfBlack);
-    s->transparent = set_palette(s, (sfVector2f){115, 530}, sfTransparent);
+    s->transparent = set_palette(s, (sfVector2f){115, 530}, sfWhite);
 }
 
 void button(sfRenderWindow *window, Sprite_t *s)
@@ -70,13 +71,18 @@ void button(sfRenderWindow *window, Sprite_t *s)
     s->jpg = set_button(s, (sfVector2f){110, 130});
     s->png = set_button(s, (sfVector2f){110, 170});
     s->bmp = set_button(s, (sfVector2f){110, 210});
+    s->plus = set_button(s, (sfVector2f){110, 50});
+    s->moins = set_button(s, (sfVector2f){110, 90});
+    s->eraser = set_button(s, (sfVector2f){110, 130});
+    s->square = set_button(s, (sfVector2f){110, 170});
+    s->circle = set_button(s, (sfVector2f){110, 210});
     return;
 }
 
 void text(sfRenderWindow *window, Sprite_t *s)
 {
     s->file_txt = set_text(s, (sfVector2f){30, 12}, "File");
-    s->edition_txt = set_text(s, (sfVector2f){120, 12}, "Option");
+    s->edition_txt = set_text(s, (sfVector2f){113, 12}, "Edition");
     s->help_txt = set_text(s, (sfVector2f){230, 12}, "Help");
     s->new_file_txt = set_text(s, (sfVector2f){20, 52}, "New...");
     s->open_txt = set_text(s, (sfVector2f){15, 92}, "Open...");
@@ -84,6 +90,11 @@ void text(sfRenderWindow *window, Sprite_t *s)
     s->jpg_txt = set_text(s, (sfVector2f){115, 132}, ".jpg");
     s->png_txt = set_text(s, (sfVector2f){115, 172}, ".png");
     s->bmp_txt = set_text(s, (sfVector2f){115, 212}, ".bmp");
+    s->plus_txt = set_text(s, (sfVector2f){148, 52}, "+");
+    s->moins_txt = set_text(s, (sfVector2f){147, 92}, "-");
+    s->eraser_txt = set_text(s, (sfVector2f){119, 132}, "eraser");
+    s->square_txt = set_text(s, (sfVector2f){119, 172}, "square");
+    s->circle_txt = set_text(s, (sfVector2f){119, 212}, "circle");
     return;
 }
 

@@ -21,6 +21,7 @@ SRCNAME	=	src/main.c		\
 			src/functions.c	\
 			src/functions_buttons.c	\
 			src/file.c	\
+			src/draw.c	\
 
 
 LIB 	= libmy.a

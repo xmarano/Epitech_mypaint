@@ -8,7 +8,7 @@
 
 static void draw_save_choice(sfRenderWindow *window, Sprite_t *s)
 {
-    if (s->menu1 % 2 != 0 && s->check_save % 2 != 0) {
+    if (s->menu1 == 1 && s->check_save == 1) {
         sfRenderWindow_drawRectangleShape(window, s->jpg, NULL);
         sfRenderWindow_drawRectangleShape(window, s->png, NULL);
         sfRenderWindow_drawRectangleShape(window, s->bmp, NULL);
@@ -20,13 +20,25 @@ static void draw_save_choice(sfRenderWindow *window, Sprite_t *s)
 
 static void draw_submenu(sfRenderWindow *window, Sprite_t *s)
 {
-    if (s->menu1 % 2 != 0) {
+    if (s->menu1 == 1) {
         sfRenderWindow_drawRectangleShape(window, s->new_file, NULL);
-        sfRenderWindow_drawText(window, s->new_file_txt, NULL);
         sfRenderWindow_drawRectangleShape(window, s->open, NULL);
-        sfRenderWindow_drawText(window, s->open_txt, NULL);
         sfRenderWindow_drawRectangleShape(window, s->save, NULL);
+        sfRenderWindow_drawText(window, s->new_file_txt, NULL);
+        sfRenderWindow_drawText(window, s->open_txt, NULL);
         sfRenderWindow_drawText(window, s->save_txt, NULL);
+    }
+    if (s->menu2 == 1) {
+        sfRenderWindow_drawRectangleShape(window, s->plus, NULL);
+        sfRenderWindow_drawRectangleShape(window, s->moins, NULL);
+        sfRenderWindow_drawRectangleShape(window, s->eraser, NULL);
+        sfRenderWindow_drawRectangleShape(window, s->square, NULL);
+        sfRenderWindow_drawRectangleShape(window, s->circle, NULL);
+        sfRenderWindow_drawText(window, s->plus_txt, NULL);
+        sfRenderWindow_drawText(window, s->moins_txt, NULL);
+        sfRenderWindow_drawText(window, s->eraser_txt, NULL);
+        sfRenderWindow_drawText(window, s->square_txt, NULL);
+        sfRenderWindow_drawText(window, s->circle_txt, NULL);
     }
 }
 
@@ -67,28 +79,50 @@ sfText *set_text(Sprite_t *s, sfVector2f pos, char *str)
     return text;
 }
 
-void check_menu(sfRenderWindow *window, Sprite_t *s)
+static void check_menu3(sfRenderWindow *window, Sprite_t *s)
 {
-    if (sfFloatRect_contains(&s->gb_file, s->pos.x, s->pos.y)) {
-        s->menu1++;
-        s->menu2 = 0;
-        s->menu3 = 0;
-        s->check_save = 0;
-    }
-    if (sfFloatRect_contains(&s->gb_edition, s->pos.x, s->pos.y)) {
-        s->menu1 = 0;
-        s->menu2++;
-        s->menu3 = 0;
-        s->check_save = 0;
-    }
     if (sfFloatRect_contains(&s->gb_help, s->pos.x, s->pos.y)) {
+        if (s->menu3 == 1) {
+            s->menu3 = 0;
+            return;
+        }
         s->menu1 = 0;
         s->menu2 = 0;
-        s->menu3++;
+        s->menu3 = 1;
         s->check_save = 0;
     }
     if (sfFloatRect_contains(&s->gb_save, s->pos.x, s->pos.y))
-        s->check_save++;
+        s->check_save = 1;
+}
+
+static void check_menu2(sfRenderWindow *window, Sprite_t *s)
+{
+    if (sfFloatRect_contains(&s->gb_edition, s->pos.x, s->pos.y)) {
+        if (s->menu2 == 1) {
+            s->menu2 = 0;
+            return;
+        }
+        s->menu1 = 0;
+        s->menu2 = 1;
+        s->menu3 = 0;
+        s->check_save = 0;
+    }
+    check_menu3(window, s);
+}
+
+void check_menu(sfRenderWindow *window, Sprite_t *s)
+{
+    if (sfFloatRect_contains(&s->gb_file, s->pos.x, s->pos.y)) {
+        if (s->menu1 == 1) {
+            s->menu1 = 0;
+            return;
+        }
+        s->menu1 = 1;
+        s->menu2 = 0;
+        s->menu3 = 0;
+        s->check_save = 0;
+    }
+    check_menu2(window, s);
 }
 
 void hover_button(Sprite_t *s, sfRectangleShape *shape, sfFloatRect *rect)

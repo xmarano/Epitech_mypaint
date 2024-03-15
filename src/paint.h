@@ -62,6 +62,11 @@ typedef struct Sprite {
     sfRectangleShape *jpg;
     sfRectangleShape *png;
     sfRectangleShape *bmp;
+    sfRectangleShape *plus;
+    sfRectangleShape *moins;
+    sfRectangleShape *eraser;
+    sfRectangleShape *square;
+    sfRectangleShape *circle;
     sfText *file_txt;
     sfText *edition_txt;
     sfText *help_txt;
@@ -71,6 +76,11 @@ typedef struct Sprite {
     sfText *jpg_txt;
     sfText *png_txt;
     sfText *bmp_txt;
+    sfText *plus_txt;
+    sfText *moins_txt;
+    sfText *eraser_txt;
+    sfText *square_txt;
+    sfText *circle_txt;
     sfFloatRect gb_file;
     sfFloatRect gb_edition;
     sfFloatRect gb_help;
@@ -80,11 +90,17 @@ typedef struct Sprite {
     sfFloatRect gb_jpg;
     sfFloatRect gb_png;
     sfFloatRect gb_bmp;
+    sfFloatRect gb_plus;
+    sfFloatRect gb_moins;
+    sfFloatRect gb_eraserb;
+    sfFloatRect gb_square;
+    sfFloatRect gb_circle;
     sfRectangleShape *current;
     int menu1;
     int menu2;
     int menu3;
     char *filename;
+    int pen;
 } Sprite_t;
 
 typedef struct St {
@@ -106,4 +122,5 @@ void save_click(sfRenderWindow *window, Sprite_t *s);
 void open_click(sfRenderWindow *window, Sprite_t *s);
 void name_file(sfRenderWindow *window, Sprite_t *s);
 void new_click(sfRenderWindow *window, Sprite_t *s);
+void edition_click(sfRenderWindow *window, Sprite_t *s);
 #endif
