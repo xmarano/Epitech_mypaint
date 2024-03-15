@@ -22,6 +22,7 @@ static void initialisation(Sprite_t *s)
     s->grey = sfColor_fromRGB(109, 112, 124);
     s->orange = sfColor_fromRGB(255, 149, 0);
     s->protanopie = sfColor_fromRGB(0, 204, 153);
+    s->sky_blue = sfColor_fromRGB(161, 172, 211);
     s->menu1 = 0;
     s->menu2 = 0;
     s->menu3 = 0;
@@ -44,6 +45,8 @@ void set_st(sfRenderWindow *window, Sprite_t *s)
     sfSprite_setTexture(s->eraser_s, s->eraser_t, sfTrue);
     sfSprite_setScale(s->eraser_s, eraser_size);
     sfSprite_setPosition(s->eraser_s, eraser_pos);
+    s->help_info = sfRectangleShape_create();
+    s->txt = sfText_create();
 }
 
 void palette(sfRenderWindow *window, Sprite_t *s)
@@ -76,7 +79,6 @@ void button(sfRenderWindow *window, Sprite_t *s)
     s->eraser = set_button(s, (sfVector2f){110, 130});
     s->square = set_button(s, (sfVector2f){110, 170});
     s->circle = set_button(s, (sfVector2f){110, 210});
-    return;
 }
 
 void text(sfRenderWindow *window, Sprite_t *s)
@@ -95,7 +97,6 @@ void text(sfRenderWindow *window, Sprite_t *s)
     s->eraser_txt = set_text(s, (sfVector2f){119, 132}, "eraser");
     s->square_txt = set_text(s, (sfVector2f){119, 172}, "square");
     s->circle_txt = set_text(s, (sfVector2f){119, 212}, "circle");
-    return;
 }
 
 int main(int argc, char **argv)

@@ -52,6 +52,7 @@ typedef struct Sprite {
     sfColor light_grey;
     sfColor orange;
     sfColor protanopie;
+    sfColor sky_blue;
     sfRectangleShape *file;
     sfRectangleShape *edition;
     sfRectangleShape *help;
@@ -101,6 +102,8 @@ typedef struct Sprite {
     int menu3;
     char *filename;
     int pen;
+    sfRectangleShape *help_info;
+    sfText *txt;
 } Sprite_t;
 
 typedef struct St {
@@ -123,4 +126,5 @@ void open_click(sfRenderWindow *window, Sprite_t *s);
 void name_file(sfRenderWindow *window, Sprite_t *s);
 void new_click(sfRenderWindow *window, Sprite_t *s);
 void edition_click(sfRenderWindow *window, Sprite_t *s);
+void help_click(sfRenderWindow *window, Sprite_t *s);
 #endif

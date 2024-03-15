@@ -16,6 +16,10 @@ static void draw_save_choice(sfRenderWindow *window, Sprite_t *s)
         sfRenderWindow_drawText(window, s->png_txt, NULL);
         sfRenderWindow_drawText(window, s->bmp_txt, NULL);
     }
+    if (s->menu3 == 1) {
+        sfRenderWindow_drawRectangleShape(window, s->help_info, NULL);
+        sfRenderWindow_drawText(window, s->txt, NULL);
+    }
 }
 
 static void draw_submenu(sfRenderWindow *window, Sprite_t *s)

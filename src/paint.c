@@ -73,6 +73,7 @@ void event_click(sfRenderWindow *window, sfEvent event, Sprite_t *s)
         check_color(window, s);
         check_menu(window, s);
         edition_click(window, s);
+        help_click(window, s);
         save_click(window, s);
         open_click(window, s);
         new_click(window, s);

@@ -6,6 +6,28 @@
 */
 #include "paint.h"
 
+void help_click(sfRenderWindow *window, Sprite_t *s)
+{
+    sfFont *font = sfFont_createFromFile("assets/text.ttf");
+    sfVector2f size = {800, 190};
+    sfVector2f pos_rect = {206, 50};
+    sfVector2f pos_text = {215, 60};
+    char *str = "Bienvenue sur le paint, vous pouvez utiliser toutes les ";
+
+    str = my_strcat(str, "differentes couleurs et formes\n\n\n Enregistrez v");
+    str = my_strcat(str, "os magnifiques oeuvres d'art en .png .jpg ou .bmp");
+    str = my_strcat(str, "\n\n Importez n'importe quel images XD avec 'open'");
+    str = my_strcat(str, "\n\n Plutot formes carre ou rond ;)?");
+    sfRectangleShape_setSize(s->help_info, size);
+    sfRectangleShape_setFillColor(s->help_info, s->sky_blue);
+    sfRectangleShape_setPosition(s->help_info, pos_rect);
+    sfText_setFont(s->txt, font);
+    sfText_setCharacterSize(s->txt, 15);
+    sfText_setColor(s->txt, sfBlack);
+    sfText_setString(s->txt, str);
+    sfText_setPosition(s->txt, pos_text);
+}
+
 void edition_click(sfRenderWindow *window, Sprite_t *s)
 {
     if (s->menu2 == 1) {
@@ -26,7 +48,6 @@ void edition_click(sfRenderWindow *window, Sprite_t *s)
             s->color = sfBlack;
         }
     }
-    return;
 }
 
 void draw_rect_colors(sfRenderWindow *window, Sprite_t *s)
